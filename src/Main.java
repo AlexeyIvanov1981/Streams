@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class Main {
@@ -19,23 +20,26 @@ public class Main {
             );
         }
         // Stream for person under 18 years;
-        persons.stream()
+        long count = persons.stream()
                 .filter(person -> person.getAge() < 18)
-                .forEach(System.out::println);
+                .count();
+        System.out.println(count);
+
+        // Stream for person from 18 to 27 years;
+        String test = persons.stream()
+                .filter(person -> person.getAge() >= 18 && person.getAge() <= 27)
+                .filter(person -> person.getSex().equals(Sex.MAN))
+                .map(Person::getFamily).toList().toString();
+        System.out.println(test);
 
         // Stream for person from 18 to 27 years;
         persons.stream()
-                .filter(person -> person.getAge() >= 18 && person.getAge() <= 27)
+                .filter(person -> person.getEducation().equals(Education.HIGHER))
+                .filter()
                 .forEach(System.out::println);
 
 
 
 
-
-
-
-
-
-        //System.out.println(persons);
     }
 }
