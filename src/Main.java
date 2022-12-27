@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.stream.Stream;
 
 public class Main {
     public static void main(String[] args) {
@@ -17,7 +18,24 @@ public class Main {
                     Education.values()[new Random().nextInt(Education.values().length)])
             );
         }
+        // Stream for person under 18 years;
+        persons.stream()
+                .filter(person -> person.getAge() < 18)
+                .forEach(System.out::println);
 
-        System.out.println(persons);
+        // Stream for person from 18 to 27 years;
+        persons.stream()
+                .filter(person -> person.getAge() >= 18 && person.getAge() <= 27)
+                .forEach(System.out::println);
+
+
+
+
+
+
+
+
+
+        //System.out.println(persons);
     }
 }
