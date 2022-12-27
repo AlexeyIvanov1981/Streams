@@ -25,20 +25,27 @@ public class Main {
                 .count();
         System.out.println(count);
 
+
         // Stream for person from 18 to 27 years;
-        String test = persons.stream()
+        List<String> personForArmy = persons.stream()
                 .filter(person -> person.getAge() >= 18 && person.getAge() <= 27)
                 .filter(person -> person.getSex().equals(Sex.MAN))
-                .map(Person::getFamily).toList().toString();
-        System.out.println(test);
+                .map(Person::getFamily)
+                //.limit(10)
+                .collect(Collectors.toList());
 
-        // Stream for person from 18 to 27 years;
-        persons.stream()
+        System.out.println(personForArmy);
+
+
+        // Stream for person from 18 to end;
+        List<Person> workingPerson = persons.stream()
                 .filter(person -> person.getEducation().equals(Education.HIGHER))
-                .filter()
-                .forEach(System.out::println);
-
-
+                .filter(person -> person.getAge() >= 18)
+                .filter(person -> (person.getSex().equals(Sex.MAN)) ? person.getAge() <= 65 : person.getAge() <= 60)
+                .sorted(Comparator.comparing(Person::getFamily))
+                //.limit(10)
+                .collect(Collectors.toList());
+        System.out.println(workingPerson);
 
 
     }
